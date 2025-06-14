@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEC Issue Opener</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">Open SEC Issue</h1>
+      <p class="subtitle">Quick access to JIRA issues</p>
+    </div>
+    
+    <div class="input-section">
+      <div class="input-wrapper">
+        <input 
+          type="text" 
+          id="issueNumber" 
+          placeholder="Enter issue number"
+          aria-label="Enter issue number"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button id="openButton" class="open-btn">
+          <span>Open</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="example">
+      <span class="example-label">Example:</span>
+      <code>1332</code>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+
+{
+  "manifest_version": 3,
+  "name": "SEC Issue Opener",
+  "version": "1.0",
+  "description": "Quick access to JIRA SEC issues on Shuttle Health Atlassian",
+  "permissions": [
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Open SEC Issue"
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  }
+}

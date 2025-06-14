@@ -1,11 +1,179 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Chrome, Zap, Shield } from "lucide-react";
 
 const Index = () => {
+  const [issueNumber, setIssueNumber] = useState('');
+
+  const handleOpenIssue = () => {
+    const trimmedNumber = issueNumber.trim();
+    if (trimmedNumber) {
+      const url = `https://shuttlehealth.atlassian.net/browse/SEC-${trimmedNumber}`;
+      window.open(url, '_blank');
+      setIssueNumber('');
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleOpenIssue();
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-xl">
+              <Chrome className="h-8 w-8 text-white" />
+            </div>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            SEC Issue Opener
+          </h1>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            A Chrome extension for lightning-fast access to JIRA SEC issues on Shuttle Health Atlassian
+          </p>
+          <Badge variant="secondary" className="mb-8">
+            Chrome Extension • Manifest V3
+          </Badge>
+        </div>
+
+        {/* Demo Section */}
+        <div className="max-w-2xl mx-auto mb-16">
+          <Card className="bg-white/95 backdrop-blur-sm shadow-2xl border-0">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-lg">
+              <CardTitle className="text-center text-lg">Try the Demo</CardTitle>
+              <CardDescription className="text-center text-blue-100">
+                Enter an issue number to see how it works
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="flex gap-3">
+                <Input
+                  type="text"
+                  placeholder="Enter issue number (e.g., 1332)"
+                  value={issueNumber}
+                  onChange={(e) => setIssueNumber(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="flex-1 text-base"
+                  autoFocus
+                />
+                <Button 
+                  onClick={handleOpenIssue}
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-6"
+                >
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Open
+                </Button>
+              </div>
+              <p className="text-sm text-gray-600 mt-3 text-center">
+                Example: Enter "1332" to open SEC-1332
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
+            <CardContent className="p-6 text-center">
+              <div className="bg-blue-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-6 w-6 text-blue-400" />
+              </div>
+              <h3 className="font-semibold mb-2">Lightning Fast</h3>
+              <p className="text-gray-300 text-sm">
+                Auto-focused input and keyboard shortcuts for instant access
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
+            <CardContent className="p-6 text-center">
+              <div className="bg-purple-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Chrome className="h-6 w-6 text-purple-400" />
+              </div>
+              <h3 className="font-semibold mb-2">Modern Extension</h3>
+              <p className="text-gray-300 text-sm">
+                Built with Manifest V3 for security and performance
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
+            <CardContent className="p-6 text-center">
+              <div className="bg-green-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-6 w-6 text-green-400" />
+              </div>
+              <h3 className="font-semibold mb-2">Secure & Clean</h3>
+              <p className="text-gray-300 text-sm">
+                Minimal permissions and lightweight design
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Installation Instructions */}
+        <Card className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm shadow-2xl border-0">
+          <CardHeader>
+            <CardTitle className="text-2xl text-center">How to Install</CardTitle>
+            <CardDescription className="text-center">
+              Get the extension running in your Chrome browser
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="font-semibold mb-3 text-lg">Developer Mode</h4>
+                <ol className="space-y-2 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex-shrink-0 flex items-center justify-center text-xs font-bold">1</span>
+                    <span>Open Chrome and go to <code className="bg-gray-100 px-2 py-1 rounded">chrome://extensions/</code></span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex-shrink-0 flex items-center justify-center text-xs font-bold">2</span>
+                    <span>Enable "Developer mode" in the top right</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex-shrink-0 flex items-center justify-center text-xs font-bold">3</span>
+                    <span>Click "Load unpacked" and select the <code className="bg-gray-100 px-2 py-1 rounded">public</code> folder</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex-shrink-0 flex items-center justify-center text-xs font-bold">4</span>
+                    <span>Pin the extension to your toolbar for easy access</span>
+                  </li>
+                </ol>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-3 text-lg">Usage</h4>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-start gap-2">
+                    <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
+                    <span>Click the extension icon in your Chrome toolbar</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
+                    <span>Type an issue number (input is auto-focused)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
+                    <span>Press Enter or click "Open" to launch the JIRA issue</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
+                    <span>The issue opens in a new tab automatically</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
