@@ -2,7 +2,29 @@
 document.addEventListener('DOMContentLoaded', function() {
   const issueInput = document.getElementById('issueNumber');
   const openButton = document.getElementById('openButton');
-  const baseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+  const titleInput = document.getElementById('titleInput');
+  const urlInput = document.getElementById('urlInput');
+  const saveConfigButton = document.getElementById('saveConfigButton');
+  const titleElement = document.querySelector('.title');
+  
+  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+  
+  // Load saved configuration
+  chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
+    if (result.extensionTitle) {
+      titleElement.textContent = result.extensionTitle;
+      titleInput.value = result.extensionTitle;
+    } else {
+      titleInput.value = 'Open SEC Issue';
+    }
+    
+    if (result.baseUrl) {
+      currentBaseUrl = result.baseUrl;
+      urlInput.value = result.baseUrl;
+    } else {
+      urlInput.value = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+    }
+  });
 
   // Auto-focus the input field when popup opens
   issueInput.focus();
@@ -11,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const issueNumber = issueInput.value.trim();
     
     if (issueNumber) {
-      const url = baseUrl + issueNumber;
+      const url = currentBaseUrl + issueNumber;
       
       // Use Chrome extension API to open new tab
       if (typeof chrome !== 'undefined' && chrome.tabs) {
@@ -26,6 +48,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function saveConfiguration() {
+    const title = titleInput.value.trim() || 'Open SEC Issue';
+    const url = urlInput.value.trim() || 'https://shuttlehealth.atlassian.net/browse/SEC-';
+    
+    chrome.storage.sync.set({
+      extensionTitle: title,
+      baseUrl: url
+    }, function() {
+      // Update the current session
+      titleElement.textContent = title;
+      currentBaseUrl = url;
+      
+      // Visual feedback
+      saveConfigButton.textContent = 'Saved!';
+      saveConfigButton.style.background = '#22c55e';
+      
+      setTimeout(() => {
+        saveConfigButton.textContent = 'Save Configuration';
+        saveConfigButton.style.background = '#64748b';
+      }, 1500);
+    });
+  }
+
   // Handle Enter key press
   issueInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
@@ -38,6 +83,12 @@ document.addEventListener('DOMContentLoaded', function() {
   openButton.addEventListener('click', function(event) {
     event.preventDefault();
     openIssue();
+  });
+
+  // Handle save configuration
+  saveConfigButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    saveConfiguration();
   });
 
   // Add subtle animation when typing

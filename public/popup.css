@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -69,6 +68,64 @@ body {
   gap: 12px;
   align-items: stretch;
   margin-bottom: 20px;
+}
+
+.config-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.config-field {
+  margin-bottom: 12px;
+}
+
+.config-field:last-of-type {
+  margin-bottom: 16px;
+}
+
+.config-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
+.config-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 12px;
+  background: white;
+  color: #1e293b;
+  transition: all 0.2s ease;
+}
+
+.config-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.save-config-btn {
+  width: 100%;
+  padding: 8px 16px;
+  background: #64748b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-config-btn:hover {
+  background: #475569;
 }
 
 #issueNumber {
