@@ -210,6 +210,23 @@ body {
   border: 1px solid #cbd5e1;
 }
 
+.config-help {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.config-help code {
+  background: #f3f4f6;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 10px;
+  color: #6366f1;
+  font-weight: 600;
+}
+
 /* Remove any default browser styling */
 html, body {
   border: none;

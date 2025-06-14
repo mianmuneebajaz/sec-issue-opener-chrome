@@ -41,13 +41,16 @@
         </div>
         
         <div class="config-field">
-          <label for="urlInput" class="config-label">Base URL:</label>
+          <label for="urlInput" class="config-label">URL Template:</label>
           <input 
             type="text" 
             id="urlInput" 
             class="config-input"
-            placeholder="https://shuttlehealth.atlassian.net/browse/SEC-"
+            placeholder="https://shuttlehealth.atlassian.net/browse/SEC-{issue}"
           >
+          <div class="config-help">
+            Use <code>{issue}</code> as placeholder for the issue number
+          </div>
         </div>
         
         <button id="saveConfigButton" class="save-config-btn">

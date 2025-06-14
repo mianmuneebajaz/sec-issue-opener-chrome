@@ -1,4 +1,3 @@
-
 // Create and inject the modal HTML
 function createModal() {
   const modalHTML = `
@@ -44,7 +43,7 @@ function initModal() {
   const closeButton = document.getElementById('sec-modal-close');
   const titleElement = document.getElementById('sec-modal-title');
   
-  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
   
   // Load saved configuration
   chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
@@ -61,7 +60,7 @@ function initModal() {
     const issueNumber = input.value.trim();
     
     if (issueNumber) {
-      const url = currentBaseUrl + issueNumber;
+      const url = currentBaseUrl.replace('{issue}', issueNumber);
       window.open(url, '_blank');
       closeModal();
     }

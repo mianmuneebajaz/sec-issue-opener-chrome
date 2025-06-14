@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const saveConfigButton = document.getElementById('saveConfigButton');
   const titleElement = document.querySelector('.title');
   
-  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
   
   // Load saved configuration
   chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
       currentBaseUrl = result.baseUrl;
       urlInput.value = result.baseUrl;
     } else {
-      urlInput.value = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+      urlInput.value = 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
     }
   });
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const issueNumber = issueInput.value.trim();
     
     if (issueNumber) {
-      const url = currentBaseUrl + issueNumber;
+      const url = currentBaseUrl.replace('{issue}', issueNumber);
       
       // Use Chrome extension API to open new tab
       if (typeof chrome !== 'undefined' && chrome.tabs) {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function saveConfiguration() {
     const title = titleInput.value.trim() || 'Open SEC Issue';
-    const url = urlInput.value.trim() || 'https://shuttlehealth.atlassian.net/browse/SEC-';
+    const url = urlInput.value.trim() || 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
     
     chrome.storage.sync.set({
       extensionTitle: title,
