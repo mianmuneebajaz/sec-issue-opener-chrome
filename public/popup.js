@@ -4,12 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const openButton = document.getElementById('openButton');
   const titleInput = document.getElementById('titleInput');
   const urlInput = document.getElementById('urlInput');
+  const shortcutInput = document.getElementById('shortcutInput');
   const saveConfigButton = document.getElementById('saveConfigButton');
+  const openShortcutsButton = document.getElementById('openShortcutsButton');
   const titleElement = document.querySelector('.title');
   
   let currentBaseUrl = 'https://www.youtube.com/watch?v={placeholder}';
   
-  // Load saved configuration
+  // Load saved configuration and current shortcut
   chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
     if (result.extensionTitle) {
       titleElement.textContent = result.extensionTitle;
@@ -23,6 +25,16 @@ document.addEventListener('DOMContentLoaded', function() {
       urlInput.value = result.baseUrl;
     } else {
       urlInput.value = 'https://www.youtube.com/watch?v={placeholder}';
+    }
+  });
+
+  // Load current keyboard shortcut
+  chrome.commands.getAll(function(commands) {
+    const openModalCommand = commands.find(cmd => cmd.name === 'open-url-modal');
+    if (openModalCommand && openModalCommand.shortcut) {
+      shortcutInput.value = openModalCommand.shortcut;
+    } else {
+      shortcutInput.value = 'Not set';
     }
   });
 
@@ -71,6 +83,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  function openShortcutsPage() {
+    chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+  }
+
   // Handle Enter key press
   valueInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
@@ -89,6 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
   saveConfigButton.addEventListener('click', function(event) {
     event.preventDefault();
     saveConfiguration();
+  });
+
+  // Handle open shortcuts page
+  openShortcutsButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    openShortcutsPage();
   });
 
   // Add subtle animation when typing
