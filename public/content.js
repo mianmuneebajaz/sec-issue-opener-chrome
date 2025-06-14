@@ -1,4 +1,3 @@
-
 // Create and inject the modal HTML
 function createModal() {
   const modalHTML = `
@@ -22,8 +21,7 @@ function createModal() {
             </button>
           </div>
           <div class="euo-example">
-            <span class="euo-example-label">Example:</span>
-            <code>YnSK9Py44dg</code>
+            <span class="euo-example-label">Loading...</span>
           </div>
           <div class="euo-shortcut-info">
             Press <kbd>Ctrl+Shift+U</kbd> to open this modal
@@ -43,22 +41,48 @@ function initModal() {
   const openButton = document.getElementById('euo-open-button');
   const closeButton = document.getElementById('euo-modal-close');
   const titleElement = document.getElementById('euo-modal-title');
+  const exampleElement = document.querySelector('.euo-example');
   
-  let currentBaseUrl = 'https://www.youtube.com/watch?v={placeholder}';
+  let currentBaseUrl = '';
   
-  // Load saved configuration
-  chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
-    if (result.extensionTitle) {
-      titleElement.textContent = result.extensionTitle;
+  function updateModalExample() {
+    if (!currentBaseUrl || !currentBaseUrl.includes('{placeholder}')) {
+      exampleElement.innerHTML = '<span class="euo-example-label" style="color:#b91c1c;">Please configure URL template in extension popup.</span>';
+      return;
     }
-    
-    if (result.baseUrl) {
-      currentBaseUrl = result.baseUrl;
+
+    // Generate example based on URL template
+    let exampleValue = '';
+    let description = '';
+
+    if (currentBaseUrl.includes('youtube.com')) {
+      exampleValue = 'YnSK9Py44dg';
+      description = '→ opens YouTube video';
+    } else if (currentBaseUrl.includes('github.com')) {
+      exampleValue = '123';
+      description = '→ opens GitHub issue #123';
+    } else if (currentBaseUrl.includes('atlassian.net') || currentBaseUrl.includes('jira')) {
+      exampleValue = 'ABC-123';
+      description = '→ opens JIRA ticket';
+    } else {
+      // Generic example
+      exampleValue = 'example-value';
+      description = '→ opens configured URL';
     }
-  });
+
+    exampleElement.innerHTML = `
+      <span class="euo-example-label">Example:</span>
+      <code>${exampleValue}</code> ${description}
+    `;
+  }
 
   function openUrl() {
     const value = input.value.trim();
+    
+    if (!currentBaseUrl) {
+      alert('Please configure the URL template in the extension popup first.');
+      return;
+    }
     
     if (value) {
       const url = currentBaseUrl.replace('{placeholder}', value);
@@ -76,7 +100,10 @@ function initModal() {
       
       if (result.baseUrl) {
         currentBaseUrl = result.baseUrl;
+      } else {
+        currentBaseUrl = '';
       }
+      updateModalExample();
     });
     
     overlay.style.display = 'flex';
