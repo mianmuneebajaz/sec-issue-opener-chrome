@@ -8,8 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const saveConfigButton = document.getElementById('saveConfigButton');
   const openShortcutsButton = document.getElementById('openShortcutsButton');
   const titleElement = document.querySelector('.title');
+  const inputSection = document.querySelector('.input-section');
+  const errorMessage = document.getElementById('errorMessage');
+  const exampleElement = document.querySelector('.example');
   
-  let currentBaseUrl = 'https://www.youtube.com/watch?v={placeholder}';
+  let currentBaseUrl = '';
   
   // Load saved configuration and current shortcut
   chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
@@ -17,14 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
       titleElement.textContent = result.extensionTitle;
       titleInput.value = result.extensionTitle;
     } else {
-      titleInput.value = 'Easy URL Opener';
+      titleInput.value = '';
     }
     
     if (result.baseUrl) {
       currentBaseUrl = result.baseUrl;
       urlInput.value = result.baseUrl;
+      showMainInterface();
+      updateExample();
     } else {
-      urlInput.value = 'https://www.youtube.com/watch?v={placeholder}';
+      urlInput.value = '';
+      showConfigurationRequired();
     }
   });
 
@@ -38,11 +44,58 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Auto-focus the input field when popup opens
-  valueInput.focus();
+  function showConfigurationRequired() {
+    inputSection.style.display = 'none';
+    errorMessage.style.display = 'block';
+    exampleElement.style.display = 'none';
+  }
+
+  function showMainInterface() {
+    inputSection.style.display = 'block';
+    errorMessage.style.display = 'none';
+    exampleElement.style.display = 'block';
+    // Auto-focus the input field when interface is shown
+    valueInput.focus();
+  }
+
+  function updateExample() {
+    if (!currentBaseUrl || !currentBaseUrl.includes('{placeholder}')) {
+      exampleElement.innerHTML = '<span class="example-label">Configure URL template to see examples</span>';
+      return;
+    }
+
+    // Generate example based on URL template
+    let exampleValue = '';
+    let description = '';
+
+    if (currentBaseUrl.includes('youtube.com')) {
+      exampleValue = 'YnSK9Py44dg';
+      description = '→ opens YouTube video';
+    } else if (currentBaseUrl.includes('github.com')) {
+      exampleValue = '123';
+      description = '→ opens GitHub issue #123';
+    } else if (currentBaseUrl.includes('atlassian.net') || currentBaseUrl.includes('jira')) {
+      exampleValue = 'ABC-123';
+      description = '→ opens JIRA ticket';
+    } else {
+      // Generic example
+      exampleValue = 'example-value';
+      description = '→ opens configured URL';
+    }
+
+    exampleElement.innerHTML = `
+      <span class="example-label">Example:</span>
+      <code>${exampleValue}</code> ${description}
+    `;
+  }
 
   function openUrl() {
     const value = valueInput.value.trim();
+    
+    if (!currentBaseUrl) {
+      alert('Please configure the URL template first');
+      return;
+    }
     
     if (value) {
       const url = currentBaseUrl.replace('{placeholder}', value);
@@ -61,16 +114,30 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function saveConfiguration() {
-    const title = titleInput.value.trim() || 'Easy URL Opener';
-    const url = urlInput.value.trim() || 'https://www.youtube.com/watch?v={placeholder}';
+    const title = titleInput.value.trim();
+    const url = urlInput.value.trim();
+    
+    if (!url) {
+      alert('Please enter a URL template');
+      return;
+    }
+    
+    if (!url.includes('{placeholder}')) {
+      alert('URL template must contain {placeholder}');
+      return;
+    }
     
     chrome.storage.sync.set({
-      extensionTitle: title,
+      extensionTitle: title || 'Easy URL Opener',
       baseUrl: url
     }, function() {
       // Update the current session
-      titleElement.textContent = title;
+      titleElement.textContent = title || 'Easy URL Opener';
       currentBaseUrl = url;
+      
+      // Show main interface if it was hidden
+      showMainInterface();
+      updateExample();
       
       // Visual feedback
       saveConfigButton.textContent = 'Saved!';
@@ -120,6 +187,14 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => {
         openButton.style.transform = '';
       }, 150);
+    }
+  });
+
+  // Update example when URL template changes
+  urlInput.addEventListener('input', function() {
+    if (this.value.includes('{placeholder}')) {
+      currentBaseUrl = this.value;
+      updateExample();
     }
   });
 });
