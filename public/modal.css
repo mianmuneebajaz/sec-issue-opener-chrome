@@ -1,4 +1,5 @@
-.sec-modal-overlay {
+
+.euo-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +14,7 @@
     Ubuntu, Cantarell, sans-serif;
 }
 
-.sec-modal {
+.euo-modal {
   background: white;
   border-radius: 12px;
   width: 90%;
@@ -33,7 +34,7 @@
   }
 }
 
-.sec-modal-header {
+.euo-modal-header {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   color: white;
   padding: 20px;
@@ -43,14 +44,14 @@
   align-items: center;
 }
 
-.sec-modal-header h2 {
+.euo-modal-header h2 {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.025em;
 }
 
-.sec-modal-close {
+.euo-modal-close {
   background: none;
   border: none;
   color: white;
@@ -66,22 +67,22 @@
   transition: background-color 0.2s ease;
 }
 
-.sec-modal-close:hover {
+.euo-modal-close:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.sec-modal-body {
+.euo-modal-body {
   padding: 24px;
 }
 
-.sec-input-wrapper {
+.euo-input-wrapper {
   display: flex;
   gap: 8px;
   align-items: stretch;
   margin-bottom: 16px;
 }
 
-#sec-issue-input {
+#euo-value-input {
   flex: 1;
   color: black;
   padding: 12px 16px;
@@ -95,18 +96,18 @@
   font-family: inherit;
 }
 
-#sec-issue-input:focus {
+#euo-value-input:focus {
   border-color: #4f46e5;
   background: white;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
-#sec-issue-input::placeholder {
+#euo-value-input::placeholder {
   color: #9ca3af;
   font-weight: 400;
 }
 
-.sec-open-btn {
+.euo-open-btn {
   padding: 12px 20px;
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   color: white;
@@ -121,28 +122,28 @@
   font-family: inherit;
 }
 
-.sec-open-btn:hover {
+.euo-open-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
 }
 
-.sec-open-btn:active {
+.euo-open-btn:active {
   transform: translateY(0);
 }
 
-.sec-example {
+.euo-example {
   text-align: center;
   font-size: 12px;
   color: #6b7280;
   margin-bottom: 16px;
 }
 
-.sec-example-label {
+.euo-example-label {
   font-weight: 500;
   margin-right: 8px;
 }
 
-.sec-example code {
+.euo-example code {
   background: #f3f4f6;
   padding: 2px 6px;
   border-radius: 4px;
@@ -153,13 +154,13 @@
   font-weight: 600;
 }
 
-.sec-shortcut-info {
+.euo-shortcut-info {
   text-align: center;
   font-size: 11px;
   color: #9ca3af;
 }
 
-.sec-shortcut-info kbd {
+.euo-shortcut-info kbd {
   background: #f3f4f6;
   border: 1px solid #d1d5db;
   border-radius: 4px;

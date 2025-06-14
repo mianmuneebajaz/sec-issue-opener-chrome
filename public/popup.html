@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEC Issue Opener</title>
+  <title>Easy URL Opener</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1 class="title">Open SEC Issue</h1>
-      <p class="subtitle">Quick access to JIRA issues</p>
+      <h1 class="title">Easy URL Opener</h1>
+      <p class="subtitle">Quick access to any URL</p>
     </div>
     
     <div class="input-section">
       <div class="input-wrapper">
         <input 
           type="text" 
-          id="issueNumber" 
-          placeholder="Enter issue number"
-          aria-label="Enter issue number"
+          id="valueInput" 
+          placeholder="Enter value"
+          aria-label="Enter value"
           autocomplete="off"
           spellcheck="false"
         >
@@ -36,7 +36,7 @@
             type="text" 
             id="titleInput" 
             class="config-input"
-            placeholder="Open SEC Issue"
+            placeholder="Easy URL Opener"
           >
         </div>
         
@@ -46,10 +46,10 @@
             type="text" 
             id="urlInput" 
             class="config-input"
-            placeholder="https://shuttlehealth.atlassian.net/browse/SEC-{issue}"
+            placeholder="https://www.youtube.com/watch?v={placeholder}"
           >
           <div class="config-help">
-            Use <code>{issue}</code> as placeholder for the issue number
+            Use <code>{placeholder}</code> as the variable that gets replaced
           </div>
         </div>
         
@@ -61,7 +61,7 @@
     
     <div class="example">
       <span class="example-label">Example:</span>
-      <code>1332</code>
+      <code>YnSK9Py44dg</code> → opens YouTube video
     </div>
   </div>
   

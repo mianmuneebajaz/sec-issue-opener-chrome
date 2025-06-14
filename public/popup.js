@@ -1,13 +1,13 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-  const issueInput = document.getElementById('issueNumber');
+  const valueInput = document.getElementById('valueInput');
   const openButton = document.getElementById('openButton');
   const titleInput = document.getElementById('titleInput');
   const urlInput = document.getElementById('urlInput');
   const saveConfigButton = document.getElementById('saveConfigButton');
   const titleElement = document.querySelector('.title');
   
-  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
+  let currentBaseUrl = 'https://www.youtube.com/watch?v={placeholder}';
   
   // Load saved configuration
   chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
@@ -15,25 +15,25 @@ document.addEventListener('DOMContentLoaded', function() {
       titleElement.textContent = result.extensionTitle;
       titleInput.value = result.extensionTitle;
     } else {
-      titleInput.value = 'Open SEC Issue';
+      titleInput.value = 'Easy URL Opener';
     }
     
     if (result.baseUrl) {
       currentBaseUrl = result.baseUrl;
       urlInput.value = result.baseUrl;
     } else {
-      urlInput.value = 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
+      urlInput.value = 'https://www.youtube.com/watch?v={placeholder}';
     }
   });
 
   // Auto-focus the input field when popup opens
-  issueInput.focus();
+  valueInput.focus();
 
-  function openIssue() {
-    const issueNumber = issueInput.value.trim();
+  function openUrl() {
+    const value = valueInput.value.trim();
     
-    if (issueNumber) {
-      const url = currentBaseUrl.replace('{issue}', issueNumber);
+    if (value) {
+      const url = currentBaseUrl.replace('{placeholder}', value);
       
       // Use Chrome extension API to open new tab
       if (typeof chrome !== 'undefined' && chrome.tabs) {
@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       // Clear the input for next use
-      issueInput.value = '';
+      valueInput.value = '';
     }
   }
 
   function saveConfiguration() {
-    const title = titleInput.value.trim() || 'Open SEC Issue';
-    const url = urlInput.value.trim() || 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
+    const title = titleInput.value.trim() || 'Easy URL Opener';
+    const url = urlInput.value.trim() || 'https://www.youtube.com/watch?v={placeholder}';
     
     chrome.storage.sync.set({
       extensionTitle: title,
@@ -72,17 +72,17 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Handle Enter key press
-  issueInput.addEventListener('keypress', function(event) {
+  valueInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      openIssue();
+      openUrl();
     }
   });
 
   // Handle button click
   openButton.addEventListener('click', function(event) {
     event.preventDefault();
-    openIssue();
+    openUrl();
   });
 
   // Handle save configuration
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Add subtle animation when typing
-  issueInput.addEventListener('input', function() {
+  valueInput.addEventListener('input', function() {
     if (this.value.trim()) {
       openButton.style.transform = 'scale(1.02)';
       setTimeout(() => {

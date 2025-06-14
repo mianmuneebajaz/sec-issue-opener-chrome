@@ -1,31 +1,32 @@
+
 // Create and inject the modal HTML
 function createModal() {
   const modalHTML = `
-    <div id="sec-modal-overlay" class="sec-modal-overlay" style="display: none;">
-      <div class="sec-modal">
-        <div class="sec-modal-header">
-          <h2 id="sec-modal-title">Open SEC Issue</h2>
-          <button class="sec-modal-close" id="sec-modal-close">&times;</button>
+    <div id="euo-modal-overlay" class="euo-modal-overlay" style="display: none;">
+      <div class="euo-modal">
+        <div class="euo-modal-header">
+          <h2 id="euo-modal-title">Easy URL Opener</h2>
+          <button class="euo-modal-close" id="euo-modal-close">&times;</button>
         </div>
-        <div class="sec-modal-body">
-          <div class="sec-input-wrapper">
+        <div class="euo-modal-body">
+          <div class="euo-input-wrapper">
             <input 
               type="text" 
-              id="sec-issue-input" 
-              placeholder="Enter issue number"
+              id="euo-value-input" 
+              placeholder="Enter value"
               autocomplete="off"
               spellcheck="false"
             >
-            <button id="sec-open-button" class="sec-open-btn">
+            <button id="euo-open-button" class="euo-open-btn">
               <span>Open</span>
             </button>
           </div>
-          <div class="sec-example">
-            <span class="sec-example-label">Example:</span>
-            <code>1332</code>
+          <div class="euo-example">
+            <span class="euo-example-label">Example:</span>
+            <code>YnSK9Py44dg</code>
           </div>
-          <div class="sec-shortcut-info">
-            Press <kbd>Ctrl+Shift+S</kbd> to open this modal
+          <div class="euo-shortcut-info">
+            Press <kbd>Ctrl+Shift+U</kbd> to open this modal
           </div>
         </div>
       </div>
@@ -37,13 +38,13 @@ function createModal() {
 
 // Modal functionality
 function initModal() {
-  const overlay = document.getElementById('sec-modal-overlay');
-  const input = document.getElementById('sec-issue-input');
-  const openButton = document.getElementById('sec-open-button');
-  const closeButton = document.getElementById('sec-modal-close');
-  const titleElement = document.getElementById('sec-modal-title');
+  const overlay = document.getElementById('euo-modal-overlay');
+  const input = document.getElementById('euo-value-input');
+  const openButton = document.getElementById('euo-open-button');
+  const closeButton = document.getElementById('euo-modal-close');
+  const titleElement = document.getElementById('euo-modal-title');
   
-  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-{issue}';
+  let currentBaseUrl = 'https://www.youtube.com/watch?v={placeholder}';
   
   // Load saved configuration
   chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
@@ -56,11 +57,11 @@ function initModal() {
     }
   });
 
-  function openIssue() {
-    const issueNumber = input.value.trim();
+  function openUrl() {
+    const value = input.value.trim();
     
-    if (issueNumber) {
-      const url = currentBaseUrl.replace('{issue}', issueNumber);
+    if (value) {
+      const url = currentBaseUrl.replace('{placeholder}', value);
       window.open(url, '_blank');
       closeModal();
     }
@@ -89,14 +90,14 @@ function initModal() {
   }
 
   // Event listeners
-  openButton.addEventListener('click', openIssue);
+  openButton.addEventListener('click', openUrl);
   closeButton.addEventListener('click', closeModal);
   
   // Handle Enter key
   input.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      openIssue();
+      openUrl();
     }
   });
 
