@@ -5,7 +5,7 @@ function createModal() {
     <div id="sec-modal-overlay" class="sec-modal-overlay" style="display: none;">
       <div class="sec-modal">
         <div class="sec-modal-header">
-          <h2>Open SEC Issue</h2>
+          <h2 id="sec-modal-title">Open SEC Issue</h2>
           <button class="sec-modal-close" id="sec-modal-close">&times;</button>
         </div>
         <div class="sec-modal-body">
@@ -42,19 +42,43 @@ function initModal() {
   const input = document.getElementById('sec-issue-input');
   const openButton = document.getElementById('sec-open-button');
   const closeButton = document.getElementById('sec-modal-close');
-  const baseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+  const titleElement = document.getElementById('sec-modal-title');
+  
+  let currentBaseUrl = 'https://shuttlehealth.atlassian.net/browse/SEC-';
+  
+  // Load saved configuration
+  chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
+    if (result.extensionTitle) {
+      titleElement.textContent = result.extensionTitle;
+    }
+    
+    if (result.baseUrl) {
+      currentBaseUrl = result.baseUrl;
+    }
+  });
 
   function openIssue() {
     const issueNumber = input.value.trim();
     
     if (issueNumber) {
-      const url = baseUrl + issueNumber;
+      const url = currentBaseUrl + issueNumber;
       window.open(url, '_blank');
       closeModal();
     }
   }
 
   function openModal() {
+    // Reload configuration each time modal opens to get latest settings
+    chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
+      if (result.extensionTitle) {
+        titleElement.textContent = result.extensionTitle;
+      }
+      
+      if (result.baseUrl) {
+        currentBaseUrl = result.baseUrl;
+      }
+    });
+    
     overlay.style.display = 'flex';
     input.focus();
     input.value = '';
