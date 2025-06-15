@@ -13,7 +13,8 @@ const AnimatedLogo = () => {
     if (meshRef.current) {
       meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime) * 0.3;
       meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.7) * 0.1;
-      meshRef.current.scale.setScalar(hovered ? 1.2 : 1);
+      const targetScale = hovered ? 1.2 : 1;
+      meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
     }
   });
 
@@ -35,35 +36,55 @@ const AnimatedLogo = () => {
   );
 };
 
-// Floating Particles
-const FloatingParticles = () => {
-  const particlesRef = useRef<THREE.Group>(null);
-
-  useFrame((state) => {
-    if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.1;
-    }
-  });
-
-  const particles = Array.from({ length: 50 }, (_, i) => (
-    <Float key={i} speed={1 + Math.random() * 2} rotationIntensity={1} floatIntensity={2}>
-      <Sphere
-        position={[
-          (Math.random() - 0.5) * 20,
-          (Math.random() - 0.5) * 20,
-          (Math.random() - 0.5) * 20
-        ]}
-        args={[0.1, 8, 8]}
-      >
+// Individual Particle Component
+const Particle = ({ position, color }: { position: [number, number, number]; color: string }) => {
+  return (
+    <Float speed={1 + Math.random() * 2} rotationIntensity={1} floatIntensity={2}>
+      <Sphere position={position} args={[0.1, 8, 8]}>
         <meshStandardMaterial
-          color={`hsl(${Math.random() * 360}, 70%, 60%)`}
-          emissive={`hsl(${Math.random() * 360}, 70%, 20%)`}
+          color={color}
+          emissive={color}
+          emissiveIntensity={0.2}
         />
       </Sphere>
     </Float>
-  ));
+  );
+};
 
-  return <group ref={particlesRef}>{particles}</group>;
+// Floating Particles
+const FloatingParticles = () => {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
+    }
+  });
+
+  // Pre-generate particle data to avoid runtime issues
+  const particleData = React.useMemo(() => {
+    return Array.from({ length: 50 }, (_, i) => ({
+      key: i,
+      position: [
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20
+      ] as [number, number, number],
+      color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`
+    }));
+  }, []);
+
+  return (
+    <group ref={groupRef}>
+      {particleData.map((particle) => (
+        <Particle
+          key={particle.key}
+          position={particle.position}
+          color={particle.color}
+        />
+      ))}
+    </group>
+  );
 };
 
 // 3D Text Component
@@ -72,7 +93,7 @@ const AnimatedText = () => {
 
   useFrame((state) => {
     if (textRef.current) {
-      textRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
+      textRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2 - 4;
     }
   });
 
@@ -84,38 +105,79 @@ const AnimatedText = () => {
       color="#ffffff"
       anchorX="center"
       anchorY="middle"
-      font="Inter"
+      font="/fonts/Inter-Regular.woff"
+      fallback="Arial"
     >
       Easy URL Opener
     </Text>
   );
 };
 
+// Error Boundary for Three.js
+class ThreeErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Three.js Error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="h-96 w-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-3xl">
+          <div className="text-white text-center">
+            <h2 className="text-2xl font-bold mb-2">Easy URL Opener</h2>
+            <p className="text-gray-300">3D visualization loading...</p>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 // Main Three.js Scene
 export const ThreeHero: React.FC = () => {
   return (
     <div className="h-96 w-full relative">
-      <Canvas
-        camera={{ position: [0, 0, 10], fov: 60 }}
-        style={{ background: 'transparent' }}
-      >
-        <ambientLight intensity={0.6} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8b5cf6" />
-        
-        <AnimatedLogo />
-        <FloatingParticles />
-        <AnimatedText />
-        
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-          autoRotate
-          autoRotateSpeed={0.5}
-        />
-      </Canvas>
+      <ThreeErrorBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 10], fov: 60 }}
+          style={{ background: 'transparent' }}
+          gl={{ antialias: true, alpha: true }}
+          dpr={[1, 2]}
+        >
+          <ambientLight intensity={0.6} />
+          <pointLight position={[10, 10, 10]} intensity={1} />
+          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8b5cf6" />
+          
+          <React.Suspense fallback={null}>
+            <AnimatedLogo />
+            <FloatingParticles />
+            <AnimatedText />
+          </React.Suspense>
+          
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+            autoRotate
+            autoRotateSpeed={0.5}
+          />
+        </Canvas>
+      </ThreeErrorBoundary>
     </div>
   );
 };
