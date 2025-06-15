@@ -63,12 +63,12 @@ const FloatingParticles = () => {
 
   // Pre-generate particle data to avoid runtime issues
   const particleData = React.useMemo(() => {
-    return Array.from({ length: 50 }, (_, i) => ({
+    return Array.from({ length: 20 }, (_, i) => ({
       key: i,
       position: [
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 15
       ] as [number, number, number],
       color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`
     }));
@@ -105,8 +105,6 @@ const AnimatedText = () => {
       color="#ffffff"
       anchorX="center"
       anchorY="middle"
-      font="/fonts/Inter-Regular.woff"
-      fallback="Arial"
     >
       Easy URL Opener
     </Text>
@@ -124,11 +122,12 @@ class ThreeErrorBoundary extends React.Component<
   }
 
   static getDerivedStateFromError(error: Error) {
+    console.log('Three.js Error caught:', error);
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Three.js Error:', error, errorInfo);
+    console.error('Three.js Error Details:', error, errorInfo);
   }
 
   render() {
@@ -157,6 +156,9 @@ export const ThreeHero: React.FC = () => {
           style={{ background: 'transparent' }}
           gl={{ antialias: true, alpha: true }}
           dpr={[1, 2]}
+          onCreated={({ gl }) => {
+            console.log('Canvas created successfully');
+          }}
         >
           <ambientLight intensity={0.6} />
           <pointLight position={[10, 10, 10]} intensity={1} />
