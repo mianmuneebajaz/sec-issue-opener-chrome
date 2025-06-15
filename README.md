@@ -68,3 +68,21 @@ With template: `https://mycompany.atlassian.net/browse/SEC-{placeholder}`
 # Ideas
 
 - A screenshot shortcut
+
+## 🔐 Permission Justifications
+
+### Tabs Permission
+
+Our extension requires the `tabs` permission to open new tabs with the generated URLs. When you enter a value and submit the form, we need this permission to create a new tab with your dynamically constructed URL.
+
+### Active Tab Permission
+
+The `activeTab` permission is used to focus the newly created tab after navigation. This provides a seamless user experience by automatically bringing your generated URL to focus after creation.
+
+### Storage Permission
+
+We use the `storage` permission to save your customized URL templates and extension preferences locally. This ensures your configuration persists between browser sessions without requiring you to reconfigure the extension each time.
+
+### Host Permission
+
+Host permissions are limited to the specific domains you configure in your URL templates. This is necessary to navigate to those URLs when you submit the form. We only request access to hosts that you explicitly define in your templates.
