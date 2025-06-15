@@ -38,7 +38,6 @@ const FloatingText = () => {
         anchorX="center"
         anchorY="middle"
         position={[0, 0, -2]}
-        font="/fonts/inter-bold.woff"
       >
         Easy URL Opener
       </Text>
@@ -62,7 +61,7 @@ const ParticleField = () => {
   return (
     <>
       {particles.map((position, index) => (
-        <mesh key={index} position={position}>
+        <mesh key={index} position={position as [number, number, number]}>
           <sphereGeometry args={[0.02, 8, 8]} />
           <meshBasicMaterial color="#8B5CF6" />
         </mesh>
