@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
   const valueInput = document.getElementById('valueInput');
   const openButton = document.getElementById('openButton');
@@ -7,29 +6,34 @@ document.addEventListener('DOMContentLoaded', function() {
   const shortcutInput = document.getElementById('shortcutInput');
   const saveConfigButton = document.getElementById('saveConfigButton');
   const openShortcutsButton = document.getElementById('openShortcutsButton');
+  const settingsButton = document.getElementById('settingsButton');
+  const configSection = document.getElementById('configSection');
   const titleElement = document.querySelector('.title');
   const inputSection = document.querySelector('.input-section');
   const errorMessage = document.getElementById('errorMessage');
   const exampleElement = document.querySelector('.example');
   
   let currentBaseUrl = '';
+  let configVisible = false;
   
   // Load saved configuration and current shortcut
   chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
+    // Load title
     if (result.extensionTitle) {
       titleElement.textContent = result.extensionTitle;
-      titleInput.value = result.extensionTitle;
+      titleInput.value = result.extensionTitle; // Fix: Set the actual value in input
     } else {
-      titleInput.value = '';
+      titleInput.value = 'Easy URL Opener'; // Fix: Set default value
     }
     
+    // Load URL template
     if (result.baseUrl) {
       currentBaseUrl = result.baseUrl;
-      urlInput.value = result.baseUrl;
+      urlInput.value = result.baseUrl; // Fix: Set the actual value in input
       showMainInterface();
       updateExample();
     } else {
-      urlInput.value = '';
+      urlInput.value = ''; // Fix: Clear input if no URL is set
       showConfigurationRequired();
     }
   });
@@ -44,10 +48,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  function toggleConfiguration() {
+    configVisible = !configVisible;
+    if (configVisible) {
+      configSection.style.display = 'block';
+      settingsButton.innerHTML = '<span>⚙️ Hide Settings</span>';
+    } else {
+      configSection.style.display = 'none';
+      settingsButton.innerHTML = '<span>⚙️ Settings</span>';
+    }
+  }
+
   function showConfigurationRequired() {
     inputSection.style.display = 'none';
     errorMessage.style.display = 'block';
     exampleElement.style.display = 'none';
+    // Auto-show configuration when required
+    configSection.style.display = 'block';
+    configVisible = true;
+    settingsButton.innerHTML = '<span>⚙️ Hide Settings</span>';
   }
 
   function showMainInterface() {
@@ -178,6 +197,12 @@ document.addEventListener('DOMContentLoaded', function() {
   openShortcutsButton.addEventListener('click', function(event) {
     event.preventDefault();
     openShortcutsPage();
+  });
+
+  // Handle settings button click
+  settingsButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    toggleConfiguration();
   });
 
   // Add subtle animation when typing

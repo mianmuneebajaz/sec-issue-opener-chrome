@@ -102,6 +102,11 @@ body {
   background: #f8fafc;
   border-top: 1px solid #e2e8f0;
   padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.config-section.hidden {
+  display: none !important;
 }
 
 .config-title {
@@ -320,4 +325,34 @@ body {
 
 :root {
   color-scheme: light dark;
+}
+
+.settings-toggle {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.settings-btn {
+  padding: 8px 16px;
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.settings-btn:hover {
+  background: #f1f5f9;
+  color: #475569;
+  transform: translateY(-1px);
+}
+
+.settings-btn:active {
+  transform: translateY(0);
 }
