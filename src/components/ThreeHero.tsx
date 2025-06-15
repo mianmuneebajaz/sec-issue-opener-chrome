@@ -48,32 +48,38 @@ const FloatingText = () => {
 const ParticleField = () => {
   const particles = useMemo(() => {
     const temp = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       temp.push([
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 15,
+        (Math.random() - 0.5) * 15,
       ]);
     }
     return temp;
   }, []);
 
   return (
-    <>
+    <group>
       {particles.map((position, index) => (
         <mesh key={index} position={position as [number, number, number]}>
           <sphereGeometry args={[0.02, 8, 8]} />
           <meshBasicMaterial color="#8B5CF6" />
         </mesh>
       ))}
-    </>
+    </group>
   );
 };
 
 const ThreeHero = () => {
   return (
     <div className="h-96 w-full relative">
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+      <Canvas 
+        camera={{ position: [0, 0, 5], fov: 75 }}
+        gl={{ alpha: true, antialias: true }}
+        onCreated={({ gl }) => {
+          gl.setClearColor('#000000', 0);
+        }}
+      >
         <ambientLight intensity={0.4} />
         <pointLight position={[10, 10, 10]} intensity={1} />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8B5CF6" />
