@@ -5,9 +5,6 @@ function createModal() {
       <div class="euo-modal">
         <div class="euo-modal-header">
           <div class="euo-modal-header-content">
-            <img src="${chrome.runtime.getURL(
-              "icon-only.png"
-            )}" alt="Logo" class="euo-modal-logo">
             <h2 id="euo-modal-title">Easy URL Opener</h2>
           </div>
           <button class="euo-modal-close" id="euo-modal-close">&times;</button>

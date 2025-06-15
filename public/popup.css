@@ -9,7 +9,7 @@ body {
   min-height: 240px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
-  background: #ffffff;
+  background: #f9fafb;
   color: #1e293b;
   border: none;
   outline: none;
@@ -17,7 +17,6 @@ body {
 }
 
 .container {
-  background: white;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -26,9 +25,10 @@ body {
 .header {
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
-  padding: 18px 24px;
+  padding: 24px;
   text-align: center;
   position: relative;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
 }
 
 .header::before {
@@ -47,7 +47,7 @@ body {
 }
 
 .logo-container {
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   position: relative;
   z-index: 1;
   display: flex;
@@ -77,6 +77,15 @@ body {
   z-index: 1;
 }
 
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  margin: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
 .input-section {
   padding: 24px;
   background: white;
@@ -86,19 +95,24 @@ body {
   display: flex;
   gap: 12px;
   align-items: stretch;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .config-section {
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 16px;
+  border-top: 1px solid #e2e8f0;
+  padding: 24px;
+}
+
+.config-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #475569;
   margin-bottom: 16px;
 }
 
 .config-field {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .config-field:last-of-type {
@@ -107,18 +121,18 @@ body {
 
 .config-label {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: #475569;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .config-input {
   width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 12px;
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
   background: white;
   color: #1e293b;
   transition: all 0.2s ease;
@@ -130,47 +144,54 @@ body {
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
 }
 
+.config-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .save-config-btn {
   width: 100%;
-  padding: 8px 16px;
-  background: #64748b;
+  padding: 10px 16px;
+  background: #6366f1;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 12px;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .save-config-btn:hover {
-  background: #475569;
+  background: #4f46e5;
+  transform: translateY(-1px);
 }
 
 .shortcuts-btn {
   width: 100%;
-  padding: 8px 16px;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 12px;
+  padding: 10px 16px;
+  background: #ffffff;
+  color: #4f46e5;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: 8px;
 }
 
 .shortcuts-btn:hover {
-  background: #4338ca;
+  background: #f8fafc;
+  transform: translateY(-1px);
 }
 
 .error-message {
-  padding: 24px;
+  padding: 20px;
   background: #fef2f2;
   border: 1px solid #fecaca;
-  border-radius: 8px;
-  margin: 0 24px 20px 24px;
+  border-radius: 12px;
+  margin: 16px;
   text-align: center;
 }
 
@@ -187,25 +208,17 @@ body {
   margin: 0;
 }
 
-.config-section {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 0 24px 16px 24px;
-}
-
 /* Modern input field styling */
 #valueInput {
   flex: 1;
-  padding: 16px 20px;
-  border: 2px solid #f1f5f9;
-  border-radius: 12px;
+  padding: 14px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
   font-size: 15px;
   font-weight: 500;
   background: #ffffff;
   color: #1e293b;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   outline: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -214,14 +227,11 @@ body {
   border-color: #6366f1;
   background: #ffffff;
   color: #1e293b;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1),
-    0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  transform: translateY(-1px);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 #valueInput:hover {
   border-color: #cbd5e1;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #valueInput::placeholder {
@@ -230,96 +240,84 @@ body {
 }
 
 .open-btn {
-  padding: 16px 24px;
+  padding: 14px 20px;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   white-space: nowrap;
   outline: none;
-  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3),
-    0 2px 4px -1px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
 }
 
 .open-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 15px -3px rgba(99, 102, 241, 0.4),
-    0 4px 6px -2px rgba(99, 102, 241, 0.3);
-  background: linear-gradient(135deg, #5855f7 0%, #7c3aed 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 10px -2px rgba(99, 102, 241, 0.3);
 }
 
 .open-btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3),
-    0 2px 4px -1px rgba(99, 102, 241, 0.2);
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px -1px rgba(99, 102, 241, 0.2);
 }
 
 .open-btn:focus {
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2),
-    0 4px 6px -1px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
 }
 
 .example {
-  text-align: center;
   font-size: 13px;
   color: #64748b;
-  background: #f8fafc;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  padding-top: 0;
+  text-align: center;
 }
 
 .example-label {
-  font-weight: 600;
-  margin-right: 8px;
-  color: #475569;
+  display: block;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
 }
 
 .example code {
-  background: #e2e8f0;
-  padding: 3px 8px;
+  background: #f1f5f9;
+  padding: 2px 6px;
   border-radius: 4px;
-  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
-    "Courier New", monospace;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
   font-size: 12px;
-  color: #6366f1;
-  font-weight: 600;
-  border: 1px solid #cbd5e1;
+  color: #4f46e5;
+  border: 1px solid #e2e8f0;
+  margin: 0 2px;
 }
 
 .config-help {
-  font-size: 11px;
-  color: #6b7280;
-  margin-top: 4px;
-  font-style: italic;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #64748b;
 }
 
 .config-help code {
-  background: #f3f4f6;
-  padding: 1px 4px;
-  border-radius: 3px;
-  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
-    "Courier New", monospace;
-  font-size: 10px;
-  color: #6366f1;
-  font-weight: 600;
+  background: #f1f5f9;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  font-size: 11px;
+  color: #4f46e5;
+  border: 1px solid #e2e8f0;
 }
 
-/* Remove any default browser styling */
 html,
 body {
-  border: none;
-  outline: none;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
-/* Ensure no weird borders on the popup itself */
 :root {
-  border: none;
-  outline: none;
+  color-scheme: light dark;
 }
