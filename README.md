@@ -64,3 +64,7 @@ With template: `https://mycompany.atlassian.net/browse/SEC-{placeholder}`
 - Responsive design that works perfectly in the Chrome toolbar
 - Auto-focused input for immediate typing
 - Visual feedback and smooth animations
+
+# Ideas
+
+- A screenshot shortcut
