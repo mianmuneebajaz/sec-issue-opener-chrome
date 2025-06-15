@@ -4,14 +4,19 @@ function createModal() {
     <div id="euo-modal-overlay" class="euo-modal-overlay" style="display: none;">
       <div class="euo-modal">
         <div class="euo-modal-header">
-          <h2 id="euo-modal-title">Easy URL Opener</h2>
+          <div class="euo-modal-header-content">
+            <img src="${chrome.runtime.getURL(
+              "icon-only.png"
+            )}" alt="Logo" class="euo-modal-logo">
+            <h2 id="euo-modal-title">Easy URL Opener</h2>
+          </div>
           <button class="euo-modal-close" id="euo-modal-close">&times;</button>
         </div>
         <div class="euo-modal-body">
           <div class="euo-input-wrapper">
-            <input 
-              type="text" 
-              id="euo-value-input" 
+            <input
+              type="text"
+              id="euo-value-input"
               placeholder="Enter value"
               autocomplete="off"
               spellcheck="false"
@@ -30,44 +35,48 @@ function createModal() {
       </div>
     </div>
   `;
-  
-  document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+  document.body.insertAdjacentHTML("beforeend", modalHTML);
 }
 
 // Modal functionality
 function initModal() {
-  const overlay = document.getElementById('euo-modal-overlay');
-  const input = document.getElementById('euo-value-input');
-  const openButton = document.getElementById('euo-open-button');
-  const closeButton = document.getElementById('euo-modal-close');
-  const titleElement = document.getElementById('euo-modal-title');
-  const exampleElement = document.querySelector('.euo-example');
-  
-  let currentBaseUrl = '';
-  
+  const overlay = document.getElementById("euo-modal-overlay");
+  const input = document.getElementById("euo-value-input");
+  const openButton = document.getElementById("euo-open-button");
+  const closeButton = document.getElementById("euo-modal-close");
+  const titleElement = document.getElementById("euo-modal-title");
+  const exampleElement = document.querySelector(".euo-example");
+
+  let currentBaseUrl = "";
+
   function updateModalExample() {
-    if (!currentBaseUrl || !currentBaseUrl.includes('{placeholder}')) {
-      exampleElement.innerHTML = '<span class="euo-example-label" style="color:#b91c1c;">Please configure URL template in extension popup.</span>';
+    if (!currentBaseUrl || !currentBaseUrl.includes("{placeholder}")) {
+      exampleElement.innerHTML =
+        '<span class="euo-example-label" style="color:#b91c1c;">Please configure URL template in extension popup.</span>';
       return;
     }
 
     // Generate example based on URL template
-    let exampleValue = '';
-    let description = '';
+    let exampleValue = "";
+    let description = "";
 
-    if (currentBaseUrl.includes('youtube.com')) {
-      exampleValue = 'YnSK9Py44dg';
-      description = '→ opens YouTube video';
-    } else if (currentBaseUrl.includes('github.com')) {
-      exampleValue = '123';
-      description = '→ opens GitHub issue #123';
-    } else if (currentBaseUrl.includes('atlassian.net') || currentBaseUrl.includes('jira')) {
-      exampleValue = 'ABC-123';
-      description = '→ opens JIRA ticket';
+    if (currentBaseUrl.includes("youtube.com")) {
+      exampleValue = "YnSK9Py44dg";
+      description = "→ opens YouTube video";
+    } else if (currentBaseUrl.includes("github.com")) {
+      exampleValue = "123";
+      description = "→ opens GitHub issue #123";
+    } else if (
+      currentBaseUrl.includes("atlassian.net") ||
+      currentBaseUrl.includes("jira")
+    ) {
+      exampleValue = "ABC-123";
+      description = "→ opens JIRA ticket";
     } else {
       // Generic example
-      exampleValue = 'example-value';
-      description = '→ opens configured URL';
+      exampleValue = "example-value";
+      description = "→ opens configured URL";
     }
 
     exampleElement.innerHTML = `
@@ -78,81 +87,85 @@ function initModal() {
 
   function openUrl() {
     const value = input.value.trim();
-    
+
     if (!currentBaseUrl) {
-      alert('Please configure the URL template in the extension popup first.');
+      alert("Please configure the URL template in the extension popup first.");
       return;
     }
-    
+
     if (value) {
-      const url = currentBaseUrl.replace('{placeholder}', value);
-      window.open(url, '_blank');
+      const url = currentBaseUrl.replace("{placeholder}", value);
+      window.open(url, "_blank");
       closeModal();
     }
   }
 
   function openModal() {
     // Reload configuration each time modal opens to get latest settings
-    chrome.storage.sync.get(['extensionTitle', 'baseUrl'], function(result) {
+    chrome.storage.sync.get(["extensionTitle", "baseUrl"], function (result) {
       if (result.extensionTitle) {
         titleElement.textContent = result.extensionTitle;
       }
-      
+
       if (result.baseUrl) {
         currentBaseUrl = result.baseUrl;
       } else {
-        currentBaseUrl = '';
+        currentBaseUrl = "";
       }
       updateModalExample();
     });
-    
-    overlay.style.display = 'flex';
+
+    overlay.style.display = "flex";
     input.focus();
-    input.value = '';
+    input.value = "";
   }
 
   function closeModal() {
-    overlay.style.display = 'none';
-    input.value = '';
+    overlay.style.display = "none";
+    input.value = "";
   }
 
   // Event listeners
-  openButton.addEventListener('click', openUrl);
-  closeButton.addEventListener('click', closeModal);
-  
+  openButton.addEventListener("click", openUrl);
+  closeButton.addEventListener("click", closeModal);
+
   // Handle Enter key
-  input.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
+  input.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
       event.preventDefault();
       openUrl();
     }
   });
 
   // Handle Escape key
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && overlay.style.display === 'flex') {
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && overlay.style.display === "flex") {
       closeModal();
     }
   });
 
   // Close modal when clicking outside
-  overlay.addEventListener('click', function(event) {
+  overlay.addEventListener("click", function (event) {
     if (event.target === overlay) {
       closeModal();
     }
   });
 
   // Listen for keyboard shortcut
-  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.action === 'openModal') {
+  chrome.runtime.onMessage.addListener(function (
+    request,
+    sender,
+    sendResponse
+  ) {
+    if (request.action === "openModal") {
       openModal();
     }
   });
 }
 
 // Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", function () {
     createModal();
     initModal();
   });

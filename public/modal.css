@@ -1,4 +1,3 @@
-
 .euo-modal-overlay {
   position: fixed;
   top: 0;
@@ -37,11 +36,23 @@
 .euo-modal-header {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   color: white;
-  padding: 20px;
+  padding: 16px 20px;
   border-radius: 12px 12px 0 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.euo-modal-header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.euo-modal-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .euo-modal-header h2 {

@@ -1,92 +1,99 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy URL Opener</title>
-  <link rel="stylesheet" href="popup.css">
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1 class="title">Easy URL Opener</h1>
-      <p class="subtitle">Quick access to any URL</p>
-    </div>
-    
-    <div class="error-message" id="errorMessage" style="display: none;">
-      <h3>Configuration Required</h3>
-      <p>Please configure your URL template below to start using the extension.</p>
-    </div>
-    
-    <div class="input-section">
-      <div class="input-wrapper">
-        <input 
-          type="text" 
-          id="valueInput" 
-          placeholder="Enter value"
-          aria-label="Enter value"
-          autocomplete="off"
-          spellcheck="false"
-        >
-        <button id="openButton" class="open-btn">
-          <span>Open</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Easy URL Opener</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo-container">
+          <img src="icon-only.png" alt="Easy URL Opener" class="header-logo" />
+        </div>
+        <p class="subtitle">Quick access to any URL</p>
+      </div>
+
+      <div class="error-message" id="errorMessage" style="display: none">
+        <h3>Configuration Required</h3>
+        <p>
+          Please configure your URL template below to start using the extension.
+        </p>
+      </div>
+
+      <div class="input-section">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="valueInput"
+            placeholder="Enter value"
+            aria-label="Enter value"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="openButton" class="open-btn">
+            <span>Open</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <div class="config-field">
+          <label for="titleInput" class="config-label">Extension Title:</label>
+          <input
+            type="text"
+            id="titleInput"
+            class="config-input"
+            placeholder="Easy URL Opener"
+          />
+        </div>
+
+        <div class="config-field">
+          <label for="urlInput" class="config-label">URL Template:</label>
+          <input
+            type="text"
+            id="urlInput"
+            class="config-input"
+            placeholder="https://example.com/item/{placeholder}"
+          />
+          <div class="config-help">
+            Use <code>{placeholder}</code> as the variable that gets replaced
+          </div>
+        </div>
+
+        <div class="config-field">
+          <label for="shortcutInput" class="config-label"
+            >Keyboard Shortcut:</label
+          >
+          <input
+            type="text"
+            id="shortcutInput"
+            class="config-input"
+            placeholder="Ctrl+Shift+U"
+            readonly
+          />
+          <div class="config-help">
+            Configure via Chrome Extensions → Keyboard shortcuts
+          </div>
+        </div>
+
+        <button id="saveConfigButton" class="save-config-btn">
+          Save Configuration
+        </button>
+
+        <button id="openShortcutsButton" class="shortcuts-btn">
+          Configure Shortcuts
         </button>
       </div>
-    </div>
-    
-    <div class="config-section">
-      <div class="config-field">
-        <label for="titleInput" class="config-label">Extension Title:</label>
-        <input 
-          type="text" 
-          id="titleInput" 
-          class="config-input"
-          placeholder="Easy URL Opener"
+
+      <div class="example">
+        <span class="example-label"
+          >Configure URL template to see examples</span
         >
       </div>
-      
-      <div class="config-field">
-        <label for="urlInput" class="config-label">URL Template:</label>
-        <input 
-          type="text" 
-          id="urlInput" 
-          class="config-input"
-          placeholder="https://example.com/item/{placeholder}"
-        >
-        <div class="config-help">
-          Use <code>{placeholder}</code> as the variable that gets replaced
-        </div>
-      </div>
-      
-      <div class="config-field">
-        <label for="shortcutInput" class="config-label">Keyboard Shortcut:</label>
-        <input 
-          type="text" 
-          id="shortcutInput" 
-          class="config-input"
-          placeholder="Ctrl+Shift+U"
-          readonly
-        >
-        <div class="config-help">
-          Configure via Chrome Extensions → Keyboard shortcuts
-        </div>
-      </div>
-      
-      <button id="saveConfigButton" class="save-config-btn">
-        Save Configuration
-      </button>
-      
-      <button id="openShortcutsButton" class="shortcuts-btn">
-        Configure Shortcuts
-      </button>
     </div>
-    
-    <div class="example">
-      <span class="example-label">Configure URL template to see examples</span>
-    </div>
-  </div>
-  
-  <script src="popup.js"></script>
-</body>
+
+    <script src="popup.js"></script>
+  </body>
 </html>
