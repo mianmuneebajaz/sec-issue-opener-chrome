@@ -7,21 +7,20 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Chrome, Zap, Shield } from "lucide-react";
 
 const Index = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [issueNumber, setIssueNumber] = useState('');
 
-  const handleOpenUrl = () => {
-    const trimmedValue = inputValue.trim();
-    if (trimmedValue) {
-      // Demo URL - this would be replaced by the actual configured template in the extension
-      const url = `https://example.com/item/${trimmedValue}`;
+  const handleOpenIssue = () => {
+    const trimmedNumber = issueNumber.trim();
+    if (trimmedNumber) {
+      const url = `https://shuttlehealth.atlassian.net/browse/SEC-${trimmedNumber}`;
       window.open(url, '_blank');
-      setInputValue('');
+      setIssueNumber('');
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      handleOpenUrl();
+      handleOpenIssue();
     }
   };
 
@@ -36,10 +35,10 @@ const Index = () => {
             </div>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Easy URL Opener
+            SEC Issue Opener
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            A Chrome extension for lightning-fast access to any URL with customizable templates
+            A Chrome extension for lightning-fast access to JIRA SEC issues on Shuttle Health Atlassian
           </p>
           <Badge variant="secondary" className="mb-8">
             Chrome Extension • Manifest V3
@@ -52,22 +51,22 @@ const Index = () => {
             <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-lg">
               <CardTitle className="text-center text-lg">Try the Demo</CardTitle>
               <CardDescription className="text-center text-blue-100">
-                Enter a value to see how it works (demo only)
+                Enter an issue number to see how it works
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6">
               <div className="flex gap-3">
                 <Input
                   type="text"
-                  placeholder="Enter any value"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Enter issue number (e.g., 1332)"
+                  value={issueNumber}
+                  onChange={(e) => setIssueNumber(e.target.value)}
                   onKeyPress={handleKeyPress}
                   className="flex-1 text-base"
                   autoFocus
                 />
                 <Button 
-                  onClick={handleOpenUrl}
+                  onClick={handleOpenIssue}
                   className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-6"
                 >
                   <ExternalLink className="h-4 w-4 mr-2" />
@@ -75,7 +74,7 @@ const Index = () => {
                 </Button>
               </div>
               <p className="text-sm text-gray-600 mt-3 text-center">
-                Configure your own URL template in the extension popup
+                Example: Enter "1332" to open SEC-1332
               </p>
             </CardContent>
           </Card>
@@ -100,9 +99,9 @@ const Index = () => {
               <div className="bg-purple-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Chrome className="h-6 w-6 text-purple-400" />
               </div>
-              <h3 className="font-semibold mb-2">Fully Customizable</h3>
+              <h3 className="font-semibold mb-2">Modern Extension</h3>
               <p className="text-gray-300 text-sm">
-                Configure any URL template with placeholder variables
+                Built with Manifest V3 for security and performance
               </p>
             </CardContent>
           </Card>
@@ -156,19 +155,19 @@ const Index = () => {
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
                     <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
-                    <span>Click the extension icon to configure your URL template</span>
+                    <span>Click the extension icon in your Chrome toolbar</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
-                    <span>Use <code className="bg-gray-100 px-1 rounded text-xs">{'{placeholder}'}</code> in your template for dynamic values</span>
+                    <span>Type an issue number (input is auto-focused)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
-                    <span>Type values and press Enter to open URLs instantly</span>
+                    <span>Press Enter or click "Open" to launch the JIRA issue</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <ExternalLink className="h-4 w-4 mt-0.5 text-blue-500 flex-shrink-0" />
-                    <span>Use keyboard shortcuts for even faster access</span>
+                    <span>The issue opens in a new tab automatically</span>
                   </li>
                 </ul>
               </div>
