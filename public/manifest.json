@@ -20,21 +20,5 @@
     "16": "icon-only.png",
     "48": "icon-only.png",
     "128": "icon-only-128x128.png"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "css": ["modal.css"]
-    }
-  ],
-  "commands": {
-    "open-url-modal": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+S",
-        "mac": "Command+Shift+S"
-      },
-      "description": "Open URL input modal"
-    }
   }
 }

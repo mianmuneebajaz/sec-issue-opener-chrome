@@ -8,7 +8,6 @@ Easy URL Opener is a powerful, configurable Chrome extension designed for develo
 
 - **🎯 Configurable URL Templates** - Set up any URL pattern with `{placeholder}` variables
 - **⚡ Lightning Fast Access** - Auto-focused input field for instant typing
-- **⌨️ Keyboard Shortcuts** - Quick access with customizable hotkeys (default: Ctrl+Shift+U)
 - **🔧 Fully Customizable** - Personalize extension title and URL templates
 - **🛡️ Secure & Lightweight** - Built with Manifest V3 for maximum security
 - **💡 Smart Examples** - Contextual examples based on your URL templates
@@ -31,7 +30,7 @@ Easy URL Opener is a powerful, configurable Chrome extension designed for develo
 ## 🚀 How It Works
 
 1. **Install & Configure** - Set your URL template with `{placeholder}` where the dynamic part goes
-2. **Quick Access** - Click the extension icon or use the keyboard shortcut
+2. **Quick Access** - Click the extension icon to open the popup
 3. **Type & Go** - Enter your value and press Enter or click Open
 4. **Instant Navigation** - Opens in a new tab automatically
 
@@ -55,7 +54,10 @@ With template: `https://mycompany.atlassian.net/browse/SEC-{placeholder}`
 2. Click the extension icon to open the popup
 3. Configure your URL template (e.g., `https://example.com/item/{placeholder}`)
 4. Set a custom title (optional)
-5. Configure keyboard shortcuts in Chrome extensions settings
+5. For faster access, configure a keyboard shortcut for the extension in Chrome:
+   - Go to `chrome://extensions/shortcuts` or navigate to Chrome Extensions > Manage Extensions > Keyboard Shortcuts
+   - Find "Easy URL Opener" and set a keyboard shortcut for "Activate the extension"
+   - This allows you to open the popup directly with your keyboard
 6. Start using immediately!
 
 ## 🎨 Modern Design
@@ -82,7 +84,3 @@ The `activeTab` permission is used to focus the newly created tab after navigati
 ### Storage Permission
 
 We use the `storage` permission to save your customized URL templates and extension preferences locally. This ensures your configuration persists between browser sessions without requiring you to reconfigure the extension each time.
-
-### Host Permission
-
-Host permissions are limited to the specific domains you configure in your URL templates. This is necessary to navigate to those URLs when you submit the form. We only request access to hosts that you explicitly define in your templates.

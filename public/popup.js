@@ -3,9 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const openButton = document.getElementById("openButton");
   const titleInput = document.getElementById("titleInput");
   const urlInput = document.getElementById("urlInput");
-  const shortcutInput = document.getElementById("shortcutInput");
   const saveConfigButton = document.getElementById("saveConfigButton");
-  const openShortcutsButton = document.getElementById("openShortcutsButton");
   const settingsButton = document.getElementById("settingsButton");
   const configSection = document.getElementById("configSection");
   const titleElement =
@@ -38,18 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       urlInput.value = "";
       showConfigurationRequired();
-    }
-  });
-
-  // Load current keyboard shortcut
-  chrome.commands.getAll(function (commands) {
-    const openModalCommand = commands.find(
-      (cmd) => cmd.name === "open-url-modal"
-    );
-    if (openModalCommand && openModalCommand.shortcut) {
-      shortcutInput.value = openModalCommand.shortcut;
-    } else {
-      shortcutInput.value = "Not set";
     }
   });
 
@@ -236,10 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  function openShortcutsPage() {
-    chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
-  }
-
   // Handle Enter key press
   valueInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
@@ -258,12 +240,6 @@ document.addEventListener("DOMContentLoaded", function () {
   saveConfigButton.addEventListener("click", function (event) {
     event.preventDefault();
     saveConfiguration();
-  });
-
-  // Handle open shortcuts page
-  openShortcutsButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    openShortcutsPage();
   });
 
   // Handle settings button click
