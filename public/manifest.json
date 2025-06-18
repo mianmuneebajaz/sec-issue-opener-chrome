@@ -3,7 +3,7 @@
   "name": "Easy URL Opener",
   "version": "1.0",
   "description": "Quick access to any URL with customizable templates",
-  "permissions": ["tabs", "activeTab", "storage"],
+  "permissions": ["activeTab", "storage"],
   "background": {
     "service_worker": "background.js"
   },
@@ -31,8 +31,8 @@
   "commands": {
     "open-url-modal": {
       "suggested_key": {
-        "default": "Ctrl+Shift+U",
-        "mac": "Command+Shift+U"
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
       },
       "description": "Open URL input modal"
     }
