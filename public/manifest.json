@@ -3,7 +3,7 @@
   "name": "Easy URL Opener",
   "version": "1.0",
   "description": "Quick access to any URL with customizable templates",
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["storage"],
   "background": {
     "service_worker": "background.js"
   },
