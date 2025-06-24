@@ -68,7 +68,7 @@ const Index = () => {
   const handleOpenIssue = () => {
     const trimmedNumber = issueNumber.trim();
     if (trimmedNumber) {
-      const url = `https://shuttlehealth.atlassian.net/browse/SEC-${trimmedNumber}`;
+      const url = `https://yourcompany.atlassian.net/browse/SEC-${trimmedNumber}`;
       window.open(url, "_blank");
       setIssueNumber("");
     }
@@ -120,16 +120,16 @@ const Index = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white text-xs sm:text-sm"
+                  className="border-blue-500/20 bg-blue-500/10 backdrop-blur-sm hover:bg-blue-500/20 text-blue-300 text-xs sm:text-sm"
                   onClick={() =>
                     window.open(
-                      "https://github.com/mianmuneebajaz/sec-issue-opener-chrome",
+                      "https://chromewebstore.google.com/detail/ippemhfalobenegbmfajnbjinlkecncm?utm_source=item-share-cb",
                       "_blank"
                     )
                   }
                 >
-                  <Github className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                  <span className="hidden xs:inline">GitHub</span>
+                  <Chrome className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden xs:inline">Install</span>
                 </Button>
               </motion.div>
             </div>
@@ -210,6 +210,28 @@ const Index = () => {
               <Badge className="bg-pink-500/20 text-pink-300 hover:bg-pink-500/30 text-xs sm:text-sm">
                 Keyboard Shortcuts
               </Badge>
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8"
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold shadow-lg shadow-blue-500/25"
+                onClick={() =>
+                  window.open(
+                    "https://chromewebstore.google.com/detail/ippemhfalobenegbmfajnbjinlkecncm?utm_source=item-share-cb",
+                    "_blank"
+                  )
+                }
+              >
+                <Chrome className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                Install from Chrome Web Store
+              </Button>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -465,90 +487,196 @@ const Index = () => {
                   <h4 className="font-semibold mb-3 text-base sm:text-lg text-white">
                     Installation
                   </h4>
-                  <ol className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        1
-                      </span>
-                      <span className="text-gray-300">
-                        Open Chrome and go to{" "}
-                        <code className="bg-white/10 px-1.5 py-0.5 rounded text-xs sm:text-sm text-gray-200">
-                          chrome://extensions/
-                        </code>
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        2
-                      </span>
-                      <span className="text-gray-300">
-                        Enable "Developer mode" in the top right
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        3
-                      </span>
-                      <span className="text-gray-300">
-                        Click "Load unpacked" and select the{" "}
-                        <code className="bg-white/10 px-1.5 py-0.5 rounded text-xs sm:text-sm text-gray-200">
-                          public
-                        </code>{" "}
-                        folder
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        4
-                      </span>
-                      <span className="text-gray-300">
-                        Pin the extension to your toolbar
-                      </span>
-                    </li>
-                  </ol>
+                  <div className="mb-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                    <h5 className="font-semibold text-blue-300 mb-2 text-sm">
+                      🌟 Easy Way (Recommended)
+                    </h5>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button
+                        size="sm"
+                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xs"
+                        onClick={() =>
+                          window.open(
+                            "https://chromewebstore.google.com/detail/ippemhfalobenegbmfajnbjinlkecncm?utm_source=item-share-cb",
+                            "_blank"
+                          )
+                        }
+                      >
+                        <Chrome className="mr-1 h-3 w-3" />
+                        Install from Chrome Web Store
+                      </Button>
+                    </motion.div>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-gray-300 mb-3 text-sm">
+                      Manual Installation (Developer)
+                    </h5>
+                    <ol className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          1
+                        </span>
+                        <span className="text-gray-300">
+                          Open Chrome and go to{" "}
+                          <code className="bg-white/10 px-1.5 py-0.5 rounded text-xs sm:text-sm text-gray-200">
+                            chrome://extensions/
+                          </code>
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          2
+                        </span>
+                        <span className="text-gray-300">
+                          Enable "Developer mode" in the top right
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          3
+                        </span>
+                        <span className="text-gray-300">
+                          Click "Load unpacked" and select the{" "}
+                          <code className="bg-white/10 px-1.5 py-0.5 rounded text-xs sm:text-sm text-gray-200">
+                            public
+                          </code>{" "}
+                          folder
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          4
+                        </span>
+                        <span className="text-gray-300">
+                          Pin the extension to your toolbar
+                        </span>
+                      </li>
+                    </ol>
+                  </div>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-3 text-base sm:text-lg text-white">
                     Configuration
                   </h4>
-                  <ul className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        1
-                      </span>
-                      <span className="text-gray-300">
-                        Click the extension icon to open the popup
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        2
-                      </span>
-                      <span className="text-gray-300">
-                        Set your URL template (e.g.,{" "}
-                        <code className="bg-white/10 px-1.5 py-0.5 rounded text-xs text-gray-200">
-                          https://example.com/issue/{`{placeholder}`}
-                        </code>
-                        )
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        3
-                      </span>
-                      <span className="text-gray-300">
-                        Customize the extension title and save
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2 sm:gap-3">
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
-                        4
-                      </span>
-                      <span className="text-gray-300">
-                        Set up keyboard shortcuts in Chrome extensions settings
-                      </span>
-                    </li>
-                  </ul>
+
+                  {/* Quick Setup for JIRA */}
+                  <div className="mb-6 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg">
+                    <h5 className="font-semibold text-blue-300 mb-3 text-sm flex items-center">
+                      <Zap className="mr-2 h-4 w-4" />
+                      🚀 Quick Setup for JIRA Teams
+                    </h5>
+                    <ol className="space-y-3 text-xs sm:text-sm">
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          1
+                        </span>
+                        <div className="text-gray-300">
+                          <strong>Set Keyboard Shortcut:</strong>
+                          <br />
+                          Go to{" "}
+                          <code className="bg-white/10 px-1.5 py-0.5 rounded text-xs text-blue-200">
+                            chrome://extensions/shortcuts
+                          </code>
+                          <br />
+                          Find "Easy URL Opener" and set "Activate the
+                          extension" to:
+                          <br />
+                          <span className="text-blue-300">
+                            • Windows/Linux:{" "}
+                            <kbd className="bg-white/10 px-1 py-0.5 rounded text-xs">
+                              Ctrl + Shift + S
+                            </kbd>
+                            <br />• Mac:{" "}
+                            <kbd className="bg-white/10 px-1 py-0.5 rounded text-xs">
+                              ⌘ + Shift + S
+                            </kbd>
+                          </span>
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          2
+                        </span>
+                        <div className="text-gray-300">
+                          <strong>Set JIRA URL Template:</strong>
+                          <br />
+                          Click the extension icon and enter:
+                          <br />
+                          <code className="bg-white/10 px-2 py-1 rounded text-xs text-green-200 block mt-1">
+                            https://yourcompany.atlassian.net/browse/SEC-
+                            {`{placeholder}`}
+                          </code>
+                        </div>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          3
+                        </span>
+                        <div className="text-gray-300">
+                          <strong>How to Use:</strong>
+                          <br />• Press your shortcut (
+                          <kbd className="bg-white/10 px-1 py-0.5 rounded text-xs">
+                            Ctrl + Shift + S
+                          </kbd>
+                          )
+                          <br />• Type ticket number (e.g.,{" "}
+                          <span className="text-blue-300">1234</span>)
+                          <br />• Opens:{" "}
+                          <span className="text-green-300">SEC-1234</span>{" "}
+                          instantly! ⚡
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
+
+                  {/* General Configuration */}
+                  <div>
+                    <h5 className="font-semibold text-gray-300 mb-3 text-sm">
+                      General Configuration Steps
+                    </h5>
+                    <ol className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          1
+                        </span>
+                        <span className="text-gray-300">
+                          Click the extension icon to open the popup
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          2
+                        </span>
+                        <span className="text-gray-300">
+                          Set your URL template (e.g.,{" "}
+                          <code className="bg-white/10 px-1.5 py-0.5 rounded text-xs text-gray-200">
+                            https://example.com/issue/{`{placeholder}`}
+                          </code>
+                          )
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          3
+                        </span>
+                        <span className="text-gray-300">
+                          Customize the extension title and save
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 sm:gap-3">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 flex items-center justify-center text-xs font-bold mt-0.5">
+                          4
+                        </span>
+                        <span className="text-gray-300">
+                          Set up keyboard shortcuts in Chrome extensions
+                          settings
+                        </span>
+                      </li>
+                    </ol>
+                  </div>
                 </div>
               </div>
               <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-white/5 rounded-lg">
@@ -580,7 +708,7 @@ const Index = () => {
         </motion.div>
 
         {/* GitHub Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -619,7 +747,7 @@ const Index = () => {
               </motion.div>
             </CardContent>
           </Card>
-        </motion.div>
+        </motion.div> */}
 
         {/* Footer */}
         <footer className="text-center text-gray-400 text-xs sm:text-sm mt-8 sm:mt-16 pb-6 sm:pb-8 px-4">
