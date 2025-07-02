@@ -775,12 +775,9 @@ const Index = () => {
             <div className="h-1 w-1 rounded-full bg-purple-400"></div>
             <div className="h-1 w-1 rounded-full bg-pink-400"></div>
           </div>
-          <p>
-            &copy; {new Date().getFullYear()} Easy URL Opener | Made with ❤️ for
-            developers
-          </p>
+          <p>&copy; {new Date().getFullYear()} Easy URL Opener</p>
           <p className="mt-2">
-            Made with love by{" "}
+            Made with ❤️ by{" "}
             <a
               href="https://github.com/mianmuneebajaz/"
               target="_blank"
