@@ -68,7 +68,7 @@ const Index = () => {
   const handleOpenIssue = () => {
     const trimmedNumber = issueNumber.trim();
     if (trimmedNumber) {
-      const url = `https://yourcompany.atlassian.net/browse/SEC-${trimmedNumber}`;
+      const url = `https://yourcompany.atlassian.net/browse/PROJ-${trimmedNumber}`;
       window.open(url, "_blank");
       setIssueNumber("");
     }
@@ -266,7 +266,7 @@ const Index = () => {
           <Card className="bg-white/5 backdrop-blur-md shadow-2xl border-white/10 overflow-hidden">
             <CardHeader className="bg-gradient-to-r from-blue-600/80 to-purple-600/80 text-white rounded-t-lg border-b border-white/10 px-4 py-3 sm:px-6 sm:py-4">
               <CardTitle className="text-center text-base sm:text-lg">
-                Try the Demo (SEC Issues)
+                Try the Demo (Jira Issues)
               </CardTitle>
               <CardDescription className="text-center text-blue-100 text-xs sm:text-sm">
                 This is just one example - you can configure any URL pattern
@@ -298,7 +298,7 @@ const Index = () => {
                 </motion.div>
               </div>
               <p className="text-xs sm:text-sm text-gray-400 mt-3 text-center">
-                Example: Enter "1332" to open SEC-1332 • Configure your own URL
+                Example: Enter "1332" to open PROJ-1332 • Configure your own URL
                 templates in the extension
               </p>
             </CardContent>
@@ -429,7 +429,7 @@ const Index = () => {
                   <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-300">
                     <li className="flex items-center">
                       <div className="w-1 h-1 rounded-full bg-blue-400 mr-2"></div>
-                      JIRA issues (SEC-1234, PROJ-567)
+                      JIRA issues (PROJ-1234, PROJ-567)
                     </li>
                     <li className="flex items-center">
                       <div className="w-1 h-1 rounded-full bg-blue-400 mr-2"></div>
@@ -625,7 +625,7 @@ const Index = () => {
                           Click the extension icon and enter:
                           <br />
                           <code className="bg-white/10 px-2 py-1 rounded text-xs text-green-200 block mt-1">
-                            https://yourcompany.atlassian.net/browse/SEC-
+                            https://yourcompany.atlassian.net/browse/PROJ-
                             {`{placeholder}`}
                           </code>
                         </div>
@@ -644,7 +644,7 @@ const Index = () => {
                           <br />• Type ticket number (e.g.,{" "}
                           <span className="text-blue-300">1234</span>)
                           <br />• Opens:{" "}
-                          <span className="text-green-300">SEC-1234</span>{" "}
+                          <span className="text-green-300">PROJ-1234</span>{" "}
                           instantly! ⚡
                         </div>
                       </li>
@@ -705,7 +705,7 @@ const Index = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                   <div>
                     <code className="block bg-white/10 p-2 rounded border border-white/10 text-xs text-gray-200">
-                      https://mycompany.atlassian.net/browse/SEC-
+                      https://mycompany.atlassian.net/browse/PROJ-
                       {`{placeholder}`}
                     </code>
                     <span className="text-blue-300 text-xs">

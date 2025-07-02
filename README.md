@@ -37,10 +37,10 @@ Easy URL Opener is a powerful, configurable Chrome extension designed for develo
 
 ## 📝 Example Usage
 
-With template: `https://mycompany.atlassian.net/browse/SEC-{placeholder}`
+With template: `https://mycompany.atlassian.net/browse/PROJ-{placeholder}`
 
 - Type: `1234`
-- Opens: `https://mycompany.atlassian.net/browse/SEC-1234`
+- Opens: `https://mycompany.atlassian.net/browse/PROJ-1234`
 
 ## 🔒 Privacy & Security
 
