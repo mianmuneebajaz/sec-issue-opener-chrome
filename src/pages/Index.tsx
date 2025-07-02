@@ -112,7 +112,26 @@ const Index = () => {
                 Easy URL Opener
               </span>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-gray-500/20 bg-gray-500/10 backdrop-blur-sm hover:bg-gray-500/20 text-gray-300 text-xs sm:text-sm"
+                  onClick={() =>
+                    window.open(
+                      "https://github.com/mianmuneebajaz/easy-url-opener",
+                      "_blank"
+                    )
+                  }
+                >
+                  <Github className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden xs:inline">GitHub</span>
+                </Button>
+              </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -708,7 +727,7 @@ const Index = () => {
         </motion.div>
 
         {/* GitHub Section */}
-        {/* <motion.div
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -734,7 +753,7 @@ const Index = () => {
                 <Button
                   onClick={() =>
                     window.open(
-                      "https://github.com/mianmuneebajaz/sec-issue-opener-chrome",
+                      "https://github.com/mianmuneebajaz/easy-url-opener",
                       "_blank"
                     )
                   }
@@ -747,7 +766,7 @@ const Index = () => {
               </motion.div>
             </CardContent>
           </Card>
-        </motion.div> */}
+        </motion.div>
 
         {/* Footer */}
         <footer className="text-center text-gray-400 text-xs sm:text-sm mt-8 sm:mt-16 pb-6 sm:pb-8 px-4">
